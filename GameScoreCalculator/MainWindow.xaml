@@ -1,0 +1,67 @@
+﻿<Window x:Class="GameScoreCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameScoreCalculator"
+        xmlns:views="clr-namespace:GameScoreCalculator.Views"
+        mc:Ignorable="d"
+        Title="FJ GameScoreCalculator" Height="500" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Steam DB Processor">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="10">
+                        <CheckBox x:Name="cbAddNew" 
+                                  Content="Add New" Margin="5" IsChecked="True"/>
+                        <CheckBox x:Name="cbUpdateExisting" 
+                                  Content="Update Existing" Margin="5" IsChecked="True"/>
+                        <CheckBox x:Name="cbUpdateExcludedByReviewThreshold" 
+                                  Content="Update Excluded By Review Threshold" Margin="5"/>
+                        <CheckBox x:Name="cbUpdateExcludedByAppDetails" 
+                                  Content="Update Excluded By AppDetails" Margin="5"/>
+                        <CheckBox x:Name="cbCreateExport" 
+                                  Content="Create Export File" Margin="5" IsChecked="True"/>
+
+                        <StackPanel Margin="0,20">
+                            <TextBlock Text="Ignore processed (days)" Margin="5,0"/>
+                            <TextBox x:Name="txtDaysIgnored" 
+                                     Text="7" 
+                                     Margin="5"
+                                     PreviewTextInput="NumberValidationTextBox"
+                                     ToolTip="Enter number (1-360)"/>
+
+                            <TextBlock Text="Min Reviews" Margin="5,10,5,0"/>
+                            <TextBox x:Name="txtReviewThreshold" 
+                                     Text="100" 
+                                     Margin="5"
+                                     PreviewTextInput="NumberValidationTextBox"
+                                     ToolTip="Enter number (0-100000)"/>
+                        </StackPanel>
+                        
+                        <Button x:Name="btnLaunch" Content="Launch" Margin="5,20" Padding="10,5" Click="LaunchButton_Click"/>
+                        <Button x:Name="btnStop" Content="Stop" Margin="5,0" Padding="10,5" Click="StopButton_Click" IsEnabled="False"/>
+                    </StackPanel>
+
+                    <RichTextBox x:Name="rtbOutput" Grid.Column="1" Margin="10" 
+                                IsReadOnly="True" IsDocumentEnabled="False"
+                                VerticalScrollBarVisibility="Auto" Background="Black"
+                                FontFamily="Consolas" Foreground="White">
+                        <FlowDocument>
+                            <Paragraph/>
+                        </FlowDocument>
+                    </RichTextBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="About">
+                <views:AboutView />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
